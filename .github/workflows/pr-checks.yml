@@ -8,60 +8,88 @@ on:
 jobs:
   check-formatting:
     runs-on: ubuntu-latest
+    name: Check Formatting
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10.6.5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Check Formatting
-        run: npm run format:check # Ensure your project has a format script (e.g., using Prettier)
+        run: pnpm run format:check # Ensure your project has a format script (e.g., using Prettier)
 
   check-linting:
+    name: Check Linting
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10.6.5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Lint Code
-        run: npm run lint:check # Ensure ESLint is configured in your project
+        run: pnpm run lint:check # Ensure ESLint is configured in your project
 
   check-types:
+    name: Check Types
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10.6.5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Type Check
-        run: npm run type:check # Ensure you have TypeScript configured
+        run: pnpm run type:check # Ensure you have TypeScript configured
 
   check-lockfile:
+    name: Check Lockfile
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
 
-      - name: Verify Lockfile
-        run: npm ci # Ensures `package-lock.json` is valid
+      - name: Check if lockfile is up to date
+        run: pnpm install --frozen-lockfile

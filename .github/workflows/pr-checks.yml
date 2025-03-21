@@ -1,0 +1,67 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches:
+      - main # Add any other branches you want checks on
+
+jobs:
+  check-formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check Formatting
+        run: npm run format # Ensure your project has a format script (e.g., using Prettier)
+
+  check-linting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint Code
+        run: npm run lint # Ensure ESLint is configured in your project
+
+  check-types:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Type Check
+        run: npm run type-check # Ensure you have TypeScript configured
+
+  check-lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Verify Lockfile
+        run: npm ci # Ensures `package-lock.json` is valid

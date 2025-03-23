@@ -43,6 +43,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup pnpm & Node.js
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10.6.5
+
+      - name: Install Dependencies (if needed)
+        run: pnpm install --frozen-lockfile
+
       - name: Check Formatting
         run: pnpm run format:check # Ensure your project has a format script (e.g., using Prettier)
 
@@ -53,6 +61,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup pnpm & Node.js
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10.6.5
+
+      - name: Install Dependencies (if needed)
+        run: pnpm install --frozen-lockfile
 
       - name: Lint Code
         run: pnpm run lint:check # Ensure ESLint is configured in your project
@@ -65,8 +81,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup pnpm & Node.js
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10.6.5
+
+      - name: Install Dependencies (if needed)
+        run: pnpm install --frozen-lockfile
+
       - name: Type Check
-        run: pnpm run type:check # esuringn typescript is configured in project
+        run: pnpm run type:check # Ensuring TypeScript is configured in project
 
   check-lockfile:
     name: Check Lockfile
@@ -75,6 +99,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup pnpm & Node.js
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10.6.5
+
+      - name: Install Dependencies (if needed)
+        run: pnpm install --frozen-lockfile
         
       - name: Check if lockfile is up to date
         run: pnpm install --frozen-lockfile

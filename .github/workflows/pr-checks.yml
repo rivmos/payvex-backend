@@ -89,6 +89,9 @@ jobs:
       - name: Install Dependencies (if needed)
         run: pnpm install --frozen-lockfile
 
+      - name: Generate Prisma Client
+        run: pnpm prisma generate
+
       - name: Type Check
         run: pnpm run type:check # Ensuring TypeScript is configured in project
 
@@ -107,6 +110,6 @@ jobs:
 
       - name: Install Dependencies (if needed)
         run: pnpm install --frozen-lockfile
-        
+
       - name: Check if lockfile is up to date
         run: pnpm install --frozen-lockfile

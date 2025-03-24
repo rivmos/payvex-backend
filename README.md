@@ -2,12 +2,14 @@
 
 ## 🔥 Overview
 
-This is the **backend** for our Node.js application using **Express, Prisma, and PostgreSQL**. The project is built with **Node.js 20+** and uses **npm** for package management. 🏗️
+This is the **backend** for our Node.js application using **Express, Prisma, and PostgreSQL**. The project is built with **Node.js 20+** and uses **pnpm** for package management. 🏗️
+
+[Buisness Logic Design](https://excalidraw.com/#room=377748d0ebbf57fb9680,-JUJADlLl0YY94BzhrZi8g)
 
 ## 🛠️ Technologies Used
 
 - 🟢 **Node.js** (Version 20+)
-- 📦 **npm** (Node Package Manager)
+- 📦 **pnpm** (Performant Node Package Manager - Version 10.6.5)
 - ⚡ **Express** (For handling HTTP requests)
 - 🗄️ **Prisma** (ORM for database interactions)
 - 🐘 **PostgreSQL** (Database)
@@ -33,19 +35,19 @@ DATABASE_URL=<your-database-url>
 ### 3️⃣ Install Dependencies 📦
 
 ```sh
-npm install
+pnpm install
 ```
 
 ### 4️⃣ Run Database Migrations 🛢️
 
 ```sh
-npm run db:migrate
+pnpm run db:migrate
 ```
 
 ### 5️⃣ Start the Development Server 🚀
 
 ```sh
-npm run dev
+pnpm run dev
 ```
 
 ---
@@ -55,10 +57,10 @@ npm run dev
 Follow these **four steps** when deploying to a production server:
 
 ```sh
-npm install --production   # 1️⃣ Install only necessary dependencies
+pnpm install --production   # 1️⃣ Install only necessary dependencies
 npx prisma migrate deploy  # 2️⃣ Apply database migrations
-npm run build              # 3️⃣ Compile TypeScript to JavaScript
-npm start                  # 4️⃣ Start the backend server
+pnpm run build              # 3️⃣ Compile TypeScript to JavaScript
+pnpm start                  # 4️⃣ Start the backend server
 ```
 
 This ensures your **dependencies, database, compiled code, and server** are all set up correctly. 🚀🔥

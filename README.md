@@ -9,7 +9,7 @@ This is the **backend** for our Node.js application using **Express, Prisma, and
 ## 🛠️ Technologies Used
 
 - 🟢 **Node.js** (Version 20+)
-- 📦 **pnpm** (Perormant Node Package Manager)
+- 📦 **pnpm** (Performant Node Package Manager - Version 10.6.5)
 - ⚡ **Express** (For handling HTTP requests)
 - 🗄️ **Prisma** (ORM for database interactions)
 - 🐘 **PostgreSQL** (Database)

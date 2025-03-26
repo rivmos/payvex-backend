@@ -14,7 +14,72 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id         String   @id @default(uuid())
+  email      String   @unique
+  name       String
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  tenants     Tenant[] // One user can create multiple tenants
+  userTenants UserTenant[]
+  roles       Role[]
+  userRoles   UserRole[]
+
+  @@map("users")
+}
+
+model Tenant {
+  id         String   @id @default(uuid())
+  name       String   @unique
+  created_by String // foreign key to User
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user        User         @relation(fields: [created_by], references: [id], onDelete: Cascade)
+  userTenants UserTenant[]
+  roles       Role[]
+  UserRole    UserRole[]
+
+  @@map("tenants")
+}
+
+model UserTenant {
+  user_id   String
+  tenant_id String
+
+  user   User   @relation(fields: [user_id], references: [id]) //Not supporting cascade deletion because we are using composite primary keys
+  tenant Tenant @relation(fields: [tenant_id], references: [id]) //Not supporting cascade deletion because we are using composite primary keys
+
+  @@id([user_id, tenant_id]) //composite primary key. There is no need for an additional id field.
+  @@map("user_tenants")
+}
+
+model Role {
+  id         String   @id @default(uuid())
+  name       String
+  created_by String
+  tenant_id  String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user      User       @relation(fields: [created_by], references: [id], onDelete: Cascade)
+  tenant    Tenant?    @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+  userRoles UserRole[]
+
+  @@unique([name, tenant_id]) // unique name per tenant not globally
+  @@map("roles")
+}
+
+model UserRole {
+  user_id   String
+  role_id   String
+  tenant_id String
+
+  user   User   @relation(fields: [user_id], references: [id])
+  role   Role   @relation(fields: [role_id], references: [id])
+  tenant Tenant @relation(fields: [tenant_id], references: [id])
+
+  @@id([user_id, role_id, tenant_id])
+  @@map("user_roles")
 }

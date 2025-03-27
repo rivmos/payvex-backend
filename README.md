@@ -5,6 +5,8 @@
 This is the **backend** for our Node.js application using **Express, Prisma, and PostgreSQL**. The project is built with **Node.js 20+** and uses **pnpm** for package management. 🏗️
 
 [Buisness Logic Design](https://excalidraw.com/#room=377748d0ebbf57fb9680,-JUJADlLl0YY94BzhrZi8g)
+[Database Tables Flow](https://drawsql.app/teams/payvex/diagrams/payvex)
+[Project Requirement Document](https://foggy-bagpipe-c41.notion.site/Payvex-1bd3bdd82007801280d6ec5fcaeb6afc?pvs=73)
 
 ## 🛠️ Technologies Used
 

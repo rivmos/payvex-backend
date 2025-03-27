@@ -1,5 +1,6 @@
 import { config } from "dotenv";
 import express from "express";
+import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 
 config();
 const app = express();
@@ -8,5 +9,8 @@ const app = express();
 import userRouter from "./routes/user.js";
 
 app.use("/api/v1/user", userRouter);
+
+//using error middleware
+app.use(errorMiddleware);
 
 export default app;

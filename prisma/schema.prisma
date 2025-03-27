@@ -21,10 +21,10 @@ model User {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  tenants     Tenant[] // One user can create multiple tenants
-  userTenants UserTenant[]
+  userTenants UserTenant[] //one user has the part of multiple tennants 
   roles       Role[]
   userRoles   UserRole[]
+  Tenant      Tenant? //one user can create only one tenant 
 
   @@map("users")
 }
@@ -32,7 +32,7 @@ model User {
 model Tenant {
   id         String   @id @default(uuid())
   name       String   @unique
-  created_by String // foreign key to User
+  created_by String   @unique // foreign key to User
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
@@ -59,7 +59,7 @@ model Role {
   id         String   @id @default(uuid())
   name       String
   created_by String
-  tenant_id  String?
+  tenant_id  String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
@@ -69,6 +69,11 @@ model Role {
 
   @@unique([name, tenant_id]) // unique name per tenant not globally
   @@map("roles")
+}
+
+model DefaultRoles {
+  id   String @id @default(uuid())
+  name String @unique
 }
 
 model UserRole {

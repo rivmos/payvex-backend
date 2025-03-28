@@ -5,7 +5,7 @@
   "main": "dist/server.js",
   "type": "module",
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "pnpx tsx prisma/seed.ts"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,6 +14,7 @@
     "build": "tsc",
     "db:migrate": "pnpx prisma migrate dev",
     "db:generate": "pnpx prisma generate",
+    "db:seed": "pnpx prisma db seed",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "lint:check": "eslint .",

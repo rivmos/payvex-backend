@@ -4,14 +4,16 @@ const prisma = new PrismaClient();
 const defaultRoles = ["admin", "manager"];
 
 async function main() {
-  defaultRoles.forEach(async (role) => {
-    const createRole = await prisma.defaultRoles.create({
-      data: {
-        name: role,
-      },
-    });
-    console.log({ createRole });
-  });
+  const rolePromises = defaultRoles.map((role) =>
+    prisma.defaultRoles.upsert({
+      where: { name: role },
+      update: {},
+      create: { name: role },
+    }),
+  );
+
+  const createdRoles = await Promise.all(rolePromises);
+  console.log({ createdRoles });
 }
 main()
   .then(async () => {

@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-const defaultRoles = ["admin", "manager"];
+const seedRoles = async () => {
+  const defaultRoles = ["admin", "manager"];
 
-async function main() {
   const rolePromises = defaultRoles.map((role) =>
     prisma.defaultRoles.upsert({
       where: { name: role },
@@ -14,7 +14,12 @@ async function main() {
 
   const createdRoles = await Promise.all(rolePromises);
   console.log({ createdRoles });
-}
+};
+
+const main = async () => {
+  await seedRoles();
+};
+
 main()
   .then(async () => {
     await prisma.$disconnect();

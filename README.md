@@ -59,10 +59,8 @@ pnpm run dev
 Follow these **four steps** when deploying to a production server:
 
 ```sh
-pnpm install --frozen-lockfile    # Install all dependencies (including dev)
 pnpm run db:generate              # Generate Prisma client
-pnpm run build                    # Compile TypeScript
-pnpm prune --production           # Remove devDependencies
+pnpm --package=typescript dlx tsc
 pnpx prisma migrate deploy        # Apply database migrations
 pnpm run db:seed                  # Seed initial data
 pnpm start                        # Start server

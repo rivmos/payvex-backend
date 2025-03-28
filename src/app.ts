@@ -1,6 +1,6 @@
 import { config } from "dotenv";
 import express from "express";
-import { errorMiddleware } from "./middlewares/errorMiddleware.js";
+import { errorMiddleware } from "./middlewares/error.js";
 
 config();
 const app = express();

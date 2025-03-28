@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { ControllerType } from "../types/functionTypes.js";
+import { ControllerType } from "../types/common.js";
 
 const catchAsyncErrors = (passedFunction: ControllerType) => {
   return (req: Request, res: Response, next: NextFunction) => {

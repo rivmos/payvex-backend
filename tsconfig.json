@@ -11,5 +11,6 @@
     "strict": true,
     "skipLibCheck": true,
     "lib": ["ES2024"]
-  }
+  },
+  "exclude": ["prisma"]
 }

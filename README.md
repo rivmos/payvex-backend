@@ -59,10 +59,11 @@ pnpm run dev
 Follow these **four steps** when deploying to a production server:
 
 ```sh
-pnpm install --production   # 1️⃣ Install only necessary dependencies
-npx prisma migrate deploy  # 2️⃣ Apply database migrations
-pnpm run build              # 3️⃣ Compile TypeScript to JavaScript
-pnpm start                  # 4️⃣ Start the backend server
+pnpm run db:generate              # Generate Prisma client
+pnpm --package=typescript dlx tsc
+pnpx prisma migrate deploy        # Apply database migrations
+pnpm run db:seed                  # Seed initial data
+pnpm start                        # Start server
 ```
 
 This ensures your **dependencies, database, compiled code, and server** are all set up correctly. 🚀🔥

@@ -2,9 +2,9 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const seedRoles = async () => {
-  const defaultRoles = ["admin", "manager"];
+  const defaultRoles:string[] = ["admin", "manager"];
 
-  const rolePromises = defaultRoles.map((role) =>
+  const rolePromises = defaultRoles.map((role:string) =>
     prisma.defaultRoles.upsert({
       where: { name: role },
       update: {},

@@ -3,6 +3,7 @@ import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import type { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import ErrorHandler from "../middlewares/error.js";
+import { sendToken } from "../utils/sendToken.js";
 
 export const createUser = catchAsyncErrors(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -29,7 +30,7 @@ export const createUser = catchAsyncErrors(
 
     const hashedPassword = await bcrypt.hash(password, 14);
 
-    await prisma.user.create({
+    const user = await prisma.user.create({
       data: {
         email: emailLower,
         name,
@@ -38,9 +39,6 @@ export const createUser = catchAsyncErrors(
       },
     });
 
-    res.status(201).json({
-      succcess: true,
-      message: "User created successfully",
-    });
+    sendToken(res, user, "User created successfully", 201);
   },
 );

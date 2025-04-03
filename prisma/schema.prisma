@@ -22,10 +22,11 @@ model User {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
 
-  userTenants UserTenant[] //one user has the part of multiple tennants 
-  roles       Role[]
-  userRoles   UserRole[]
-  Tenant      Tenant? //one user can create only one tenant 
+  userTenants  UserTenant[] //one user has the part of multiple tennants 
+  roles        Role[]
+  userRoles    UserRole[]
+  Tenant       Tenant? //one user can create only one tenant 
+  RefreshToken RefreshToken[]
 
   @@map("users")
 }
@@ -90,4 +91,16 @@ model UserRole {
 
   @@id([user_id, role_id, tenant_id])
   @@map("user_roles")
+}
+
+model RefreshToken {
+  id         String   @id @default(uuid())
+  token      String   @unique
+  userId     String
+  created_at DateTime @default(now())
+  expired_at DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("refresh_tokens")
 }
